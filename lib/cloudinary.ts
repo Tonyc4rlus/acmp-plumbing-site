@@ -1,10 +1,21 @@
-import { v2 as cloudinary } from "cloudinary";
+// lib/auth.ts
+import jwt from "jsonwebtoken";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: true,
-});
+export const adminCookieName = "acmp_admin"; // <- usado pelos routes
 
-export default cloudinary;
+const SECRET = process.env.JWT_SECRET || "change-me";
+
+// Gera um token de sessão para o admin
+export function createSession() {
+  return jwt.sign({ role: "admin" }, SECRET, { expiresIn: "7d" });
+}
+
+// Verifica se o token é válido e tem papel de admin
+export function verifySession(token: string) {
+  try {
+    const payload = jwt.verify(token, SECRET) as any;
+    return payload?.role === "admin";
+  } catch {
+    return false;
+  }
+}

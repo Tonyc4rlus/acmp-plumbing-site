@@ -6,6 +6,5 @@ body { /* estilos básicos */
   background: #fff;
   color: #1f2937;
 }
-
 .btn { @apply inline-flex items-center px-4 py-2 rounded-md font-medium border border-transparent bg-green-600 text-white hover:bg-green-700 transition; }
 .card { @apply rounded-lg border bg-white shadow-sm; }

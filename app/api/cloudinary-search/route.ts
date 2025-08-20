@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { searchByTag } from '../lib/cloudinary'
+import { searchByTag } from '.../lib/cloudinary'
 
 export async function GET(req: Request) {
   const url = new URL(req.url);

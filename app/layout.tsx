@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Nav from './components/Nav'
-import Footer from './components/Footer'
+import Nav from './Nav'
+import Footer from './Footer'
 
 export const metadata: Metadata = {
   title: 'ACMP Plumbing — Serviços profissionais de encanamento',

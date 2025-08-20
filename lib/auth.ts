@@ -1,20 +1,21 @@
-import bcrypt from "bcryptjs";
+// lib/auth.ts
 import jwt from "jsonwebtoken";
 
-const SECRET = process.env.JWT_SECRET || "changeme";
+export const adminCookieName = "acmp_admin"; // <- usado pelos routes
 
-export function signToken(payload: object) {
-  return jwt.sign(payload, SECRET, { expiresIn: "7d" });
+const SECRET = process.env.JWT_SECRET || "change-me";
+
+// Gera um token de sessão para o admin
+export function createSession() {
+  return jwt.sign({ role: "admin" }, SECRET, { expiresIn: "7d" });
 }
 
-export function verifyToken(token: string) {
-  return jwt.verify(token, SECRET);
-}
-
-export async function hashPassword(password: string) {
-  return bcrypt.hash(password, 10);
-}
-
-export async function comparePassword(password: string, hash: string) {
-  return bcrypt.compare(password, hash);
+// Verifica se o token é válido e tem papel de admin
+export function verifySession(token: string) {
+  try {
+    const payload = jwt.verify(token, SECRET) as any;
+    return payload?.role === "admin";
+  } catch {
+    return false;
+  }
 }

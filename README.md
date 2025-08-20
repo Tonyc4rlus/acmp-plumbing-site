@@ -10,3 +10,4 @@
    - APP_URL = (pode deixar vazio por enquanto)
 3) Deploy. Depois acesse `/admin/login` para enviar fotos/vídeos.
 
+
